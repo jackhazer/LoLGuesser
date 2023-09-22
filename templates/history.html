@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+    History
+
+{% endblock %}
+
+{% block main %}
+
+<main class="container py-5 text-center">
+   <table class="table">
+      <thead>
+         <tr>
+            <th class="text-start">Mode</th>
+            <th class="text-end">Score</th>
+            <th class="text-end">Played</th>
+         </tr>
+      </thead>
+      <tbody>
+         {% for record in history %}
+         <tr>
+            <td class="text-start">{{record['mode']}}</td>
+            <td class="text-end">{{record['score']}}</td>
+            <td class="text-end">{{record['date']}}</td>
+         </tr>
+         {% endfor %}
+      </tbody>
+   </table>
+</main>
+
+{% endblock%}

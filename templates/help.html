@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+    Help
+
+{% endblock %}
+
+{% block main %}
+    <div class="container ">
+        <div>
+            <h3>How to Play?</h3>
+            <p >
+                We will randomly select a League of Legends ranked match. You may reveal one clue by clicking on the button beside the champion you choose.
+                Using all the information you have, guess which team is winning!
+            </p>
+        </div>
+        <div>
+            <h3>Specification</h3>
+            <ul>
+                <li>All matches are from the KR region Master-to-Challenger League.</li>
+                <li>You will get 1 point if you guess it right, and your score resets to zero when you're wrong.</li>
+                <li>Login to store your own record!</li>
+            </ul>
+        </div>
+
+    </div>
+    <style>
+        .container{
+            overflow-wrap: anywhere;
+            max-width: 450px;
+            text-align: left;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+        }
+        .container h3{
+            text-align: center;
+        }
+    </style>
+{% endblock %}

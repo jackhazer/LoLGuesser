@@ -1,0 +1,48 @@
+ .container{
+     width: 500px;
+     margin: 0px auto;
+     font-size: 18px;
+     vertical-align: top;
+     display: flex;
+     justify-content: center;
+     margin: 0px auto;
+     flex-direction: column;
+}
+ thead th{
+     font-size:20px;
+     text-align: center;
+}
+ .items {
+     display: flex;
+     flex-direction: row;
+}
+ .item div img{
+     width:36px;
+}
+ .champion div img{
+     width:55px;
+     border-radius: 50%;
+}
+ .kda{
+     font-size:16px;
+     text-align: center;
+}
+ .cs{
+     font-size:16px;
+     text-align: center;
+}
+ .champion .level {
+     position: absolute;
+     left: -1px;
+     bottom: -1px;
+     width: 17px;
+     height: 17px;
+     background: rgb(32, 45, 55);
+     border-radius: 50%;
+     color: rgb(255, 255, 255);
+     font-size: 13px;
+     text-align: center;
+     line-height: 15px;
+     font-family: Roboto, sans-serif;
+}
+ 

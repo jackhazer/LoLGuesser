@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, width=device-width">
+
+        <!-- http://getbootstrap.com/docs/5.1/ -->
+        <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" rel="stylesheet">
+        <script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"></script>
+
+        <!-- https://favicon.io/emoji-favicons/money-bag/ -->
+        <link href="/static/favicon.ico" rel="icon">
+        <link href="/static/opgg.css" rel="stylesheet">
+        <link href="/static/styles.css" rel="stylesheet">
+
+        <title>LoLGuesser</title>
+
+    </head>
+
+    <body>
+
+        <nav class="bg-light border navbar navbar-expand-md navbar-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/"><span class="blue">LoLGuesser</span></a>
+                <button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-bs-target="#navbar" data-bs-toggle="collapse" type="button">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbar">
+                    {% if session["user_id"] %}
+                        <ul class="navbar-nav me-auto mt-2">
+                            <li class="nav-item"><a class="nav-link" href="/play">Play</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/help">Help</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/history">Stats</a></li>
+                        </ul>
+                        <ul class="navbar-nav ms-auto mt-2">
+                            <li class="nav-item"><a class="nav-link" href="/logout">Log Out</a></li>
+                        </ul>
+                    {% else %}
+                        <ul class="navbar-nav me-auto mt-2">
+                            <li class="nav-item"><a class="nav-link" href="/play">Play</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/help">Help</a></li>
+                        </ul>
+                        <ul class="navbar-nav ms-auto mt-2">
+                            <li class="nav-item"><a class="nav-link" href="/register">Register</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/login">Log In</a></li>
+                        </ul>
+                    {% endif %}
+                </div>
+            </div>
+        </nav>
+
+        <main class="container-fluid py-5 text-center">
+            <div class="container col-md-6">
+                <h3 class="time">{{match['info']["gameDuration"]//60}}:{{match['info']["gameDuration"]%60}}</h3>
+                <h3 class="score">Score:{{score}}</h3>
+                <table class="blue_side">
+
+                    <thead>
+                        <tr>
+                            <th>Show</th>
+                            <th>-</th>
+                            <th>Item</th>
+                            <th>KDA</th>
+                            <th>CS</th>
+                        </tr>
+                    </thead>
+                    {% for i in range(5) %}
+
+                        <tr class="index" data-index="{{ i }}">
+                            <td>
+                                <button value="{{i}}" onclick="update({{i}})"></button>
+                            </td>
+                            <td class="champion">
+                                <div class="" style="position: relative;">
+                                    <img src="https://opgg-static.akamaized.net/meta/images/lol/champion/{{match['info']['participants'][i]['championName']}}.png"
+                                         width="32" alt="">
+                                    <div class="level">{{match['info']['participants'][i]['champLevel']}}</div>
+                                </div>
+                            </td>
+
+                             <!-- DEFAULT -->
+                            <td class="items">
+                                <div class="item">
+                                    <div class="{{i}}item" style="position: relative;"><img
+                                            src="https://opgg-static.akamaized.net/meta/images/lol/item/7050.png"
+                                            width="22" alt=""></div>
+                                </div>
+                                <div class="item">
+                                    <div class="{{i}}item" style="position: relative;"><img
+                                            src="https://opgg-static.akamaized.net/meta/images/lol/item/7050.png"
+                                            width="22" alt=""></div>
+                                </div>
+                                <div class="item">
+                                    <div class="{{i}}item" style="position: relative;"><img
+                                            src="https://opgg-static.akamaized.net/meta/images/lol/item/7050.png"
+                                            width="22" alt=""></div>
+                                </div>
+                                <div class="item">
+                                    <div class="{{i}}item" style="position: relative;"><img
+                                            src="https://opgg-static.akamaized.net/meta/images/lol/item/7050.png"
+                                            width="22" alt=""></div>
+                                </div>
+                                <div class="item">
+                                    <div class="{{i}}item" style="position: relative;"><img
+                                            src="https://opgg-static.akamaized.net/meta/images/lol/item/7050.png"
+                                            width="22" alt=""></div>
+                                </div>
+                                <div class="item">
+                                    <div class="{{i}}item" style="position: relative;"><img
+                                            src="https://opgg-static.akamaized.net/meta/images/lol/item/7050.png"
+                                            width="22" alt=""></div>
+                                </div>
+                                <div class="item">
+                                    <div class="{{i}}item" style="position: relative;"><img
+                                            src="https://opgg-static.akamaized.net/meta/images/lol/item/7050.png"
+                                            width="22" alt=""></div>
+                                </div>
+                            </td>
+                            <td class="kda">
+                               */*/*
+                            </td>
+                            <td class="cs">
+                               --
+                            </td>
+                        </tr>
+                    {% endfor %}
+
+
+                </table>
+                <table class="red_side">
+
+                    <thead>
+                        <tr>
+                            <th>Show</th>
+                            <th>-</th>
+                            <th>Item</th>
+                            <th>KDA</th>
+                            <th>CS</th>
+                        </tr>
+                    </thead>
+                    {% for i in range(5,10) %}
+
+                        <tr class="index" data-index="{{ i }}">
+                            <td>
+                                <button value="{{i}}" onclick="update({{i}})"></button>
+                            </td>
+                            <td class="champion">
+                                <div class="" style="position: relative;">
+                                    <img src="https://opgg-static.akamaized.net/meta/images/lol/champion/{{match['info']['participants'][i]['championName']}}.png"
+                                         width="32" alt="">
+                                    <div class="level">{{match['info']['participants'][i]['champLevel']}}</div>
+                                </div>
+                            </td>
+
+                             <!-- DEFAULT -->
+                            <td class="items">
+                                <div class="item">
+                                    <div class="{{i}}item" style="position: relative;"><img
+                                            src="https://opgg-static.akamaized.net/meta/images/lol/item/7050.png"
+                                            width="22" alt=""></div>
+                                </div>
+                                <div class="item">
+                                    <div class="{{i}}item" style="position: relative;"><img
+                                            src="https://opgg-static.akamaized.net/meta/images/lol/item/7050.png"
+                                            width="22" alt=""></div>
+                                </div>
+                                <div class="item">
+                                    <div class="{{i}}item" style="position: relative;"><img
+                                            src="https://opgg-static.akamaized.net/meta/images/lol/item/7050.png"
+                                            width="22" alt=""></div>
+                                </div>
+                                <div class="item">
+                                    <div class="{{i}}item" style="position: relative;"><img
+                                            src="https://opgg-static.akamaized.net/meta/images/lol/item/7050.png"
+                                            width="22" alt=""></div>
+                                </div>
+                                <div class="item">
+                                    <div class="{{i}}item" style="position: relative;"><img
+                                            src="https://opgg-static.akamaized.net/meta/images/lol/item/7050.png"
+                                            width="22" alt=""></div>
+                                </div>
+                                <div class="item">
+                                    <div class="{{i}}item" style="position: relative;"><img
+                                            src="https://opgg-static.akamaized.net/meta/images/lol/item/7050.png"
+                                            width="22" alt=""></div>
+                                </div>
+                                <div class="item">
+                                    <div class="{{i}}item" style="position: relative;"><img
+                                            src="https://opgg-static.akamaized.net/meta/images/lol/item/7050.png"
+                                            width="22" alt=""></div>
+                                </div>
+                            </td>
+                            <td class="kda">
+                               */*/*
+                            </td>
+                            <td class="cs">
+                               --
+                            </td>
+                        </tr>
+                    {% endfor %}
+
+
+                </table>
+            </div>
+            <div>Which team wins?</div>
+            <form name="choose_side" action="/play" method="post" onsubmit="side.disabled = true; return true;">
+                <button class="btn btn-primary" type="submit" id="blue_side" name="side"   value="{{'blue'== win}}">Upper</button>
+                <button class="btn btn-primary" type="submit" id="red_side" name="side"   value="{{'red'== win}}">Lower</button>
+            </form>
+        </main>
+
+        <footer class="mb-5 small text-center text-muted">
+            Data provided by <a href="https://developer.riotgames.com/apis">Riot</a>
+        </footer>
+       <script>
+            function update(index) {
+                let row = document.querySelector(`tr.index[data-index="${index}"]`);
+                let itemImages = row.querySelectorAll('.item img');
+                let kdaElement = row.querySelector('.kda');
+                let csElement = row.querySelector('.cs');
+
+                let matchData = {{ match | tojson | safe }};
+                for (let i = 0; i < 7; i++) {
+                    const itemImage = itemImages[i];
+                    let itemImageUrl = matchData['info']['participants'][index]['item' + i];
+                    itemImageUrl = (itemImageUrl == '0') ? '7050' : itemImageUrl;
+                    console.log(itemImageUrl);
+                    itemImage.src = `https://opgg-static.akamaized.net/meta/images/lol/item/${itemImageUrl}.png`;
+                }
+
+                let kills = matchData['info']['participants'][index]['kills'];
+                let deaths = matchData['info']['participants'][index]['deaths'];
+                let assists = matchData['info']['participants'][index]['assists'];
+                let cs = matchData['info']['participants'][index]["totalMinionsKilled"] +
+                           matchData['info']['participants'][index]["totalAllyJungleMinionsKilled"] +
+                           matchData['info']['participants'][index]["totalEnemyJungleMinionsKilled"];
+
+                kdaElement.textContent = `${kills}/${deaths}/${assists}`;
+                csElement.textContent = cs;
+
+                let container = document.querySelector('.container');
+                let buttons = container.querySelectorAll('button');
+                buttons.forEach(button => {
+                    button.disabled = true;
+                });
+            }
+        </script>
+
+
+    </body>
+
+</html>
